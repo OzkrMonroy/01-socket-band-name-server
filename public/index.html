@@ -13,27 +13,8 @@
     <title>MiniChat</title>
   </head>
   <body class="container">
-    <h1 class="mt-5">MiniChat</h1>
+    <h1 class="mt-5">Denied access</h1>
     <hr />
-
-    <form id="myForm">
-      <div class="row">
-        <div class="col-8">
-          <input
-            type="text"
-            id="txtMessage"
-            class="form-control"
-            placeholder="Message"
-          />
-        </div>
-        <div class="col-4"><button class="btn btn-primary" type="submit">Send</button></div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <ul class="mt-2" id="myList"></ul>
-        </div>
-      </div>
-    </form>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
@@ -44,35 +25,9 @@
     <script>
       const socket = io("http://localhost:8080");
 
-      const myForm = document.querySelector("#myForm");
-      const inputMessage = document.querySelector("#txtMessage");
-      const messagesList = document.querySelector("#myList");
-      const messages = []
-
-      myForm.addEventListener('submit', (ev) => {
-        ev.preventDefault();
-
-        const message = inputMessage.value
-        socket.emit('chat-message-fe', { message });
-        inputMessage.value = ""
-      })
-
-      socket.on("welcome-message", (data) => {
-        console.log("Socket emitted the next message: ", data);
+      socket.on("current-bands", (bands) => {
+        console.log(bands);
       });
-
-      socket.on("chat-message-bk", (data) => {
-        messages.push(data);
-        messagesList.innerHTML += `<li> ${data.message} </li>`
-      })
-
-      setTimeout(() => {
-        socket.emit("client-message", {
-          message: "Hello from fronted",
-          name: "Oscar",
-        });
-        console.log("Message sended");
-      }, 2000);
     </script>
   </body>
 </html>
