@@ -22,7 +22,7 @@ class BandList {
 
   increaseVotes(bandId) {
     this.bandList = this.bandList.map((band) => {
-      if (band === bandId) {
+      if (band.id === bandId) {
         band.votes += 1;
       }
       return band;
@@ -30,7 +30,7 @@ class BandList {
   }
   changeName(bandId, newName) {
     this.bandList = this.bandList.map((band) => {
-      if (band === bandId) {
+      if (band.id === bandId) {
         band.name = newName;
       }
       return band;
